@@ -41,7 +41,7 @@ questions = {
         "B) 68",
         "C) 53",
         "D) 123",
-        "B"
+        "A"
     ],
     "What's the default UDP port for NetBIOS Datagram Service?": [
         "A) 137",
@@ -66,33 +66,38 @@ questions = {
     ],
     "What is the primary risk of XSS?": [
         "A) Data leakage",
-        "B) Session hijacking",
+        "B) Denial of service",
         "C) Server overload",
-        "B"
+        "D) Session hijacking",
+        "D"
     ],
     "What is the main purpose of CSRF attacks?": [
         "A) To steal data",
-        "B) To perform unauthorized actions on behalf of the user",
+        "B) To inject malicious code",
         "C) To crash the server",
-        "B"
+        "D) To perform unauthorized actions on behalf of the user",
+        "D"
     ],
     "What is the typical response to an SSRF attack?": [
         "A) Ignoring it",
-        "B) Limiting outbound requests",
+        "B) Limiting inbound requests",
         "C) Increasing server capacity",
-        "B"
+        "D) Limiting outbound requests",
+        "D"
     ],
-    "What type of attack involves injecting malicious scripts into webpages?": [
+    "What type of attack involves injecting malicious javascript scripts into webpages?": [
         "A) SQLi",
-        "B) XSS",
-        "C) CSRF",
-        "B"
+        "B) SSRF",
+        "C) XSS",
+        "D) CSRF",
+        "C"
     ],
     "What is the primary objective of using prepared statements?": [
         "A) To improve performance",
-        "B) To prevent SQL injection",
+        "B) To support multicast groups",    
         "C) To allow dynamic queries",
-        "B"
+        "D) To prevent SQL injection",
+        "D"
     ],
     "What is the primary purpose of Class E IP addresses?": [
         "A) To allocate addresses for special use",
@@ -104,7 +109,7 @@ questions = {
     "What does the IP address 0.0.0.0 represent?": [
         "A) A loopback address",
         "B) A private address",
-        "C) An invalid, unknown, or non-applicable target",
+        "C) Serves as a default route",
         "D) A multicast address",
         "C"
     ],
@@ -136,13 +141,6 @@ questions = {
         "D) Loopback addresses",
         "C"
     ],
-    "What is the default port number for PostgreSQL?": [
-        "A) 3306",
-        "B) 5432",
-        "C) 1433",
-        "D) 8080",
-        "B"
-    ],
     "What is the default port number for POP3S?": [
         "A) 110",
         "B) 993",
@@ -156,20 +154,6 @@ questions = {
         "C) 995",
         "D) 587",
         "B"
-    ],
-    "What is the default port number for RDP?": [
-        "A) 22",
-        "B) 3389",
-        "C) 80",
-        "D) 443",
-        "B"
-    ],
-    "What is the default port number for SMB?": [
-        "A) 21",
-        "B) 23",
-        "C) 445",
-        "D) 25",
-        "C"
     ],
     "How many rounds are required for a 192-bit AES key?": [
         "A) 10",
@@ -202,7 +186,7 @@ questions = {
     "What do the permission bits 'rwxr-xr-x' represent?": [
         "A) Owner has read, write, execute; group has read, execute; others have none",
         "B) Owner has read, write; group has read; others have none",
-        "C) Owner has read, write, execute; group has read, execute; others have read, execute",
+        "C) Owner has read, write, execute; group has read, write; others have read, execute",
         "D) Owner has read, write, execute; group has read, execute; others have read, execute",
         "D"
     ],
@@ -360,13 +344,6 @@ questions = {
         "D) 123",
         "A"
     ],
-    "What's the default UDP port for NTP (Network Time Protocol)?": [
-        "A) 80",
-        "B) 123",
-        "C) 53",
-        "D) 22",
-        "B"
-    ],
     "What's the default UDP port for NetBIOS Name Service?": [
         "A) 138",
         "B) 137",
@@ -399,7 +376,7 @@ questions = {
         "A) 123",
         "B) 520",
         "C) 68",
-        "D) 68",
+        "D) 69",
         "B"
     ],
     "What's the default UDP port for L2TP (Layer 2 Tunneling Protocol)?": [
@@ -469,7 +446,7 @@ questions = {
         "A) Internal Protocol",
         "B) Intermediate Protocol",
         "C) Interconnected Protocol",
-        "D) Inernet Protocol",
+        "D) Internet Protocol",
         "D"
     ],
     "What does DNS stand for?": [
@@ -1074,13 +1051,6 @@ questions = {
         "D) Zero Buffer Recovery",
         "A"
     ],
-    "What does FUD stand for?": [
-        "A) Fear, Uncertainty, and Doubt",
-        "B) Fear, Uncertainty, and Data",
-        "C) Fear, Uncertainty, and Distrust",
-        "D) Fear, Understanding, and Distrust",
-        "A"
-    ],
     "What does TTP stand for?": [
         "A) Tools, Techniques, and Procedures",
         "B) Tactics, Techniques, and Procedures",
@@ -1270,13 +1240,6 @@ questions = {
         "D) 027",
         "C"
     ],
-    "What does rwho command do?": [
-        "A) None of the above",
-        "B) Kills user sessions",
-        "C) Displays users logged into the system",
-        "D) Logs out users",
-        "C"
-    ],
     "What is the purpose of rsh?": [
         "A) Secure file transfer",
         "B) Remote file transfer",
@@ -1341,25 +1304,55 @@ questions = {
         "C"
     ]
 }
+
 def flashcard_game():
     question_list = list(questions.items())
     random.shuffle(question_list)
-    print("Type your answer, hit Enter to skip, or type 'exit' to quit\n")
+    print("\n\nType your answer, hit Enter to skip, or type 'exit' to quit\n")
+    
+    score = 0
+    total_questions = len(question_list)
+    wrong_questions = []
 
-    for question, answer in question_list:
-        print(question, "\n")
-        if isinstance(answer, list):
-            for option in answer[:-1]:
-                print(option)
-            user_answer = input("\nYour answer: ")
-            if user_answer.lower() == 'exit':
-                print("\nExiting the game.")
-                break
-            correct_answer_letter = answer[-1]
-            correct_answer_value = answer[ord(correct_answer_letter) - ord('A')]
+    def ask_questions(questions_to_ask):
+        nonlocal score
+        for index, (question, answer) in enumerate(questions_to_ask, start=1):
+            print(f"{index}/{total_questions}\n")
+            print(question, "\n")
+            if isinstance(answer, list):
+                for option in answer[:-1]:
+                    print(option)
+                user_answer = input("\nYour answer: ")
+                if user_answer.lower() == 'exit':
+                    print("\nExiting the game.")
+                    return False
+                correct_answer_letter = answer[-1]
+                correct_answer_value = answer[ord(correct_answer_letter) - ord('A')]
 
-            if user_answer.upper() == correct_answer_letter:
-                print("\nCorrect! The answer is:", correct_answer_value, "\n")
-            else:
-                print("\nIncorrect! The correct answer is:", correct_answer_value, "\n")
+                if user_answer.upper() == correct_answer_letter:
+                    print(f"\033[92m\nCorrect! The answer is: {correct_answer_value}\033[0m\n")
+                    score += 1
+                else:
+                    print(f"\033[91m\nIncorrect! The correct answer is: \033[1m{correct_answer_value}\033[0m\n")
+                    wrong_questions.append((question, answer))
+            print("-" * 40)
+        return True
+
+    if not ask_questions(question_list):
+        return
+    
+    while wrong_questions:
+        print(f"\nGame Over! You answered {score}/{total_questions} correctly.\n")
+        retry = input("Would you like to retry the questions you got wrong? (yes/no): ")
+        if retry.lower() == 'yes':
+            print("\nRetrying incorrect questions...\n")
+            wrong_questions_copy = wrong_questions[:]
+            wrong_questions.clear()
+            if not ask_questions(wrong_questions_copy):
+                return
+        else:
+            break
+    
+    print(f"\nFinal score: You answered {score}/{total_questions} correctly.")
+
 flashcard_game()
