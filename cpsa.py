@@ -1302,7 +1302,23 @@ questions = {
         "C) Displays users logged into the system",
         "D) Logs out users",
         "C"
-    ]
+    ],
+    "What port does Border Gateway protocol use?": [
+        "A) 179",
+        "B) 178",
+        "C) 554",
+        "D) 13",
+        "A"
+    ],
+    "What port does VMWARE use?": [
+        "A) 902",
+        "B) 555",
+        "C) 123",
+        "D) 445",
+        "A"
+    ],
+
+
 }
 
 def flashcard_game():
@@ -1356,3 +1372,4 @@ def flashcard_game():
     print(f"\nFinal score: You answered {score}/{total_questions} correctly.")
 
 flashcard_game()
+
